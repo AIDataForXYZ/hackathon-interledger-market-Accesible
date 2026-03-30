@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Guide — Native Language Market</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.7;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1a1a2e 100%);
+            border-bottom: 1px solid #334155;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #f8fafc;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 strong { font-weight: 700; color: #38bdf8; }
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+        .section {
+            margin-top: 2.5rem;
+        }
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #38bdf8;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #38bdf8;
+            display: block;
+        }
+        .stat .label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .login-group {
+            margin-bottom: 2rem;
+        }
+        .login-group h3 {
+            font-size: 1rem;
+            color: #f1f5f9;
+            margin-bottom: 0.25rem;
+        }
+        .login-group .hint {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th {
+            text-align: left;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #334155;
+        }
+        td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid #1e293b;
+            vertical-align: top;
+        }
+        tr:hover td {
+            background: #1e293b;
+        }
+        .username {
+            font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+            color: #38bdf8;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            vertical-align: middle;
+            margin-left: 0.35rem;
+        }
+        .badge-audio {
+            background: #065f46;
+            color: #6ee7b7;
+            border: 1px solid #047857;
+        }
+        .badge-submission {
+            background: #7c2d12;
+            color: #fdba74;
+            border: 1px solid #9a3412;
+        }
+        .badge-complete {
+            background: #1e3a5f;
+            color: #7dd3fc;
+            border: 1px solid #1d4ed8;
+        }
+        .badge-draft {
+            background: #3f3f46;
+            color: #a1a1aa;
+            border: 1px solid #52525b;
+        }
+        .password-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .password-box span {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        .password-box code {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            letter-spacing: 0.1em;
+        }
+        .walkthrough {
+            counter-reset: step;
+        }
+        .step {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 1.25rem;
+            top: 1.25rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            background: #38bdf8;
+            color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .step strong {
+            color: #f1f5f9;
+        }
+        .step .action {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        .step code {
+            background: #334155;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #fbbf24;
+        }
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+        .content-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .content-list li::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #38bdf8;
+            border-radius: 50%;
+            margin-top: 0.6rem;
+            flex-shrink: 0;
+        }
+        .assets-needed {
+            background: #1a1a2e;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .assets-needed h4 {
+            color: #fbbf24;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .asset-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #1e293b;
+        }
+        .asset-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .asset-priority {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+        .priority-high {
+            background: #7f1d1d;
+            color: #fca5a5;
+            border: 1px solid #991b1b;
+        }
+        .priority-med {
+            background: #78350f;
+            color: #fcd34d;
+            border: 1px solid #92400e;
+        }
+        .priority-low {
+            background: #1e3a5f;
+            color: #93c5fd;
+            border: 1px solid #1d4ed8;
+        }
+        .asset-desc {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        .asset-desc strong {
+            color: #f1f5f9;
+        }
+        .enter-btn {
+            display: inline-block;
+            background: #38bdf8;
+            color: #0f172a;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+        .enter-btn:hover { background: #7dd3fc; }
+        .tech-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.25rem;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 2;
+        }
+        .tech-box span { color: #64748b; }
+        .tech-box code { color: #fbbf24; }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.5rem; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            table { font-size: 0.8rem; }
+            td, th { padding: 0.4rem 0.5rem; }
+            .step { padding-left: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1><strong>Native Language Market</strong> — Demo Guide</h1>
+    <p>Interledger-powered marketplace for accessible, native-language work. Voice-first design for communities with limited written language.</p>
+    <a href="/browse/" class="enter-btn">Enter the Marketplace</a>
+</div>
+
+<div class="container">
+
+    <!-- Stats -->
+    <div class="section">
+        <div class="section-title">What's loaded</div>
+        <div class="stats">
+            <div class="stat"><span class="number">{{ user_count }}</span><span class="label">Users</span></div>
+            <div class="stat"><span class="number">{{ job_count }}</span><span class="label">Jobs</span></div>
+            <div class="stat"><span class="number">{{ app_count }}</span><span class="label">Applications</span></div>
+            <div class="stat"><span class="number">{{ sub_count }}</span><span class="label">Submissions</span></div>
+            <div class="stat"><span class="number">{{ language_count }}</span><span class="label">Languages</span></div>
+            <div class="stat"><span class="number">{{ audio_count }}</span><span class="label">Audio clips</span></div>
+        </div>
+    </div>
+
+    <!-- What's in the demo -->
+    <div class="section">
+        <div class="section-title">Demo contents</div>
+        <ul class="content-list">
+            <li>5 funder organizations — NGO, health clinic, coffee cooperative, electoral institute, cultural preservation group</li>
+            <li>19 creators across 16 indigenous languages — Nahuatl, Otomi, Quechua, Tsotsil, Maya, Mixteco, Purepecha, Zapoteco, Tseltal, Guarani, Aymara, Kaqchikel, Totonaco, Chinanteco, Mazateco, Triqui, Mam, Wixarika</li>
+            <li>Every user has a detailed bio about their background, community, and skills</li>
+            <li>Jobs at every lifecycle stage: recruiting, selecting, submitting, reviewing, and complete</li>
+            <li>Real translation content in submissions — Otomi, Quechua, Zapoteco, Chinanteco, Triqui, Nahuatl, Aymara, Mazateco</li>
+            <li>2 submissions with actual Otomi audio recordings attached</li>
+            <li>12 Otomi audio snippets for UI narration (buttons, labels, navigation)</li>
+            <li>Job types: health pamphlets, coffee labels, radio spots, children's stories, museum signs, clinic voicemails, detainee rights, app UI, ecological signs, recipe transcription, artisan programs</li>
+        </ul>
+    </div>
+
+    <!-- Logins -->
+    <div class="section">
+        <div class="section-title">Demo logins</div>
+        <div class="password-box">
+            <span>All accounts use password:</span>
+            <code>demo123</code>
+        </div>
+
+        <!-- Funders -->
+        <div class="login-group">
+            <h3>Funders</h3>
+            <p class="hint">Log in to see posted jobs, review applications, hear submitted audio, accept/reject work</p>
+            <table>
+                <thead><tr><th>Username</th><th>Who</th><th>What you'll see</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="username">demo_funder</td>
+                        <td>Roberto Martinez — Lenguas Vivas A.C.</td>
+                        <td>4 jobs, submissions with audio to review</td>
+                    </tr>
+                    <tr>
+                        <td class="username">voces_vivas</td>
+                        <td>Fundacion Voces Vivas (NGO)</td>
+                        <td>3 jobs across submitting, reviewing, complete</td>
+                    </tr>
+                    <tr>
+                        <td class="username">clinica_esperanza</td>
+                        <td>Clinica Comunitaria Esperanza</td>
+                        <td>2 jobs — diabetes prevention + patient rights</td>
+                    </tr>
+                    <tr>
+                        <td class="username">cafe_sierra</td>
+                        <td>Cooperativa Cafe de la Sierra</td>
+                        <td>1 job — coffee label translation</td>
+                    </tr>
+                    <tr>
+                        <td class="username">instituto_electoral</td>
+                        <td>Instituto Electoral Regional</td>
+                        <td>1 job — election radio spot</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Creators -->
+        <div class="login-group">
+            <h3>Creators — Active</h3>
+            <p class="hint">Log in to see applications, work in progress, and submitted deliverables</p>
+            <table>
+                <thead><tr><th>Username</th><th>Who</th><th>Highlights</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="username">carlos_otomi</td>
+                        <td>Carlos Hernandez — Otomi</td>
+                        <td>
+                            <span class="badge badge-audio">profile audio</span>
+                            <span class="badge badge-submission">2 submissions w/ audio</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">maria_nahuatl</td>
+                        <td>Maria Santos — Nahuatl</td>
+                        <td>Applied to 3 jobs
+                            <span class="badge badge-complete">completed UI translation</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">ana_quechua</td>
+                        <td>Ana Quispe — Quechua (Peru)</td>
+                        <td>
+                            <span class="badge badge-submission">submitted detainee rights</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">pedro_zapoteco</td>
+                        <td>Pedro Ruiz — Zapoteco</td>
+                        <td>Selected for art job
+                            <span class="badge badge-submission">submitted eco signs</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">luis_tsotsil</td>
+                        <td>Luis Gomez — Tsotsil</td>
+                        <td>
+                            <span class="badge badge-audio">profile audio</span>
+                            Applied to ecoturismo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">diego_aymara</td>
+                        <td>Diego Mamani — Aymara (Peru)</td>
+                        <td>
+                            <span class="badge badge-draft">draft in progress</span>
+                            Children's story translation
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">elena_triqui</td>
+                        <td>Elena de Jesus — Triqui</td>
+                        <td>
+                            <span class="badge badge-complete">completed transcription</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">carmen_chinanteca</td>
+                        <td>Carmen Flores — Chinanteco</td>
+                        <td>
+                            <span class="badge badge-complete">completed artisan program</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="username">raul_mazateco</td>
+                        <td>Raul Garcia — Mazateco</td>
+                        <td>
+                            <span class="badge badge-submission">submitted clinic voicemail</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- More creators -->
+        <div class="login-group">
+            <h3>Creators — With profiles, ready to browse</h3>
+            <p class="hint">Full bios, no active jobs yet — good for showing the application flow</p>
+            <table>
+                <thead><tr><th>Username</th><th>Who</th><th>Language</th></tr></thead>
+                <tbody>
+                    <tr><td class="username">ernesto_nahuatl</td><td>Ernesto Cuautle</td><td>Nahuatl (Puebla)</td></tr>
+                    <tr><td class="username">soledad_kaqchikel</td><td>Soledad Ixchop</td><td>Kaqchikel (Guatemala)</td></tr>
+                    <tr><td class="username">valentina_tseltal</td><td>Valentina Mendez</td><td>Tseltal (Chiapas)</td></tr>
+                    <tr><td class="username">guadalupe_purepecha</td><td>Guadalupe Morales</td><td>Purepecha (Michoacan)</td></tr>
+                    <tr><td class="username">rosa_maya</td><td>Rosa Chan Poot</td><td>Maya Yucateco</td></tr>
+                    <tr><td class="username">juan_mixteco</td><td>Juan Lopez</td><td>Mixteco (Oaxaca)</td></tr>
+                    <tr><td class="username">isadora_guarani</td><td>Isadora Benitez</td><td>Guarani (Paraguay)</td></tr>
+                    <tr><td class="username">tomas_totonaco</td><td>Tomas Espinosa</td><td>Totonaco (Veracruz)</td></tr>
+                    <tr><td class="username">yolanda_huichol</td><td>Yolanda Carrillo</td><td>Wixarika (Jalisco)</td></tr>
+                    <tr><td class="username">andres_mam</td><td>Andres Pablo</td><td>Mam (Guatemala)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Both -->
+        <div class="login-group">
+            <h3>Both roles — Fund and create</h3>
+            <table>
+                <thead><tr><th>Username</th><th>Who</th><th>Role</th></tr></thead>
+                <tbody>
+                    <tr><td class="username">miguel_both</td><td>Miguel Torres — Zapoteco</td><td>Museum director, posts jobs + translates</td></tr>
+                    <tr><td class="username">sofia_both</td><td>Sofia Morales — UNAM linguist</td><td>Funds research + does translations</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Walkthrough -->
+    <div class="section">
+        <div class="section-title">Suggested walkthrough</div>
+        <div class="walkthrough">
+            <div class="step">
+                <strong>Browse anonymously</strong>
+                <div class="action">Go to <code>/browse/</code> — see a lively marketplace with real jobs from real organizations</div>
+            </div>
+            <div class="step">
+                <strong>Log in as <code>carlos_otomi</code></strong>
+                <div class="action">Dashboard shows his applications and active work. His profile has audio. Go to his submitted work to see/hear the election spot recording.</div>
+            </div>
+            <div class="step">
+                <strong>Log in as <code>demo_funder</code></strong>
+                <div class="action">Owner dashboard shows jobs at every stage. Go to the ecoturismo job — see Carlos's submission with audio. Play it. Accept or reject.</div>
+            </div>
+            <div class="step">
+                <strong>Log in as <code>diego_aymara</code></strong>
+                <div class="action">See his draft submission on the children's story — work in progress state.</div>
+            </div>
+            <div class="step">
+                <strong>Switch language to Otomi</strong>
+                <div class="action">Use the language selector. Audio buttons throughout the UI will play Otomi narration for interface elements. This is the accessibility-first design in action.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assets needed -->
+    <div class="section">
+        <div class="section-title">What would make it even better</div>
+        <div class="assets-needed">
+            <h4>Media assets needed</h4>
+            <div class="asset-item">
+                <span class="asset-priority priority-high">High</span>
+                <div class="asset-desc"><strong>Profile photos (26)</strong> — Headshots or illustrated avatars for each user. Without these, every profile card is a blank avatar. AI-generated or stock photos work. See <code>ASSETS_NEEDED.md</code> for exact filenames and character descriptions.</div>
+            </div>
+            <div class="asset-item">
+                <span class="asset-priority priority-med">Med</span>
+                <div class="asset-desc"><strong>1-2 audio profile intros</strong> — 10-20 second clips of someone introducing themselves in Spanish or an indigenous language. Demonstrates the core voice-first product feature.</div>
+            </div>
+            <div class="asset-item">
+                <span class="asset-priority priority-low">Nice</span>
+                <div class="asset-desc"><strong>1 submission audio</strong> — Someone reading the detainee rights or clinic voicemail text in any indigenous language (30-60 sec). Completes the end-to-end review flow.</div>
+            </div>
+            <div class="asset-item">
+                <span class="asset-priority priority-low">Nice</span>
+                <div class="asset-desc"><strong>1 illustration</strong> — Hummingbird with marigold flowers for the art job. Shows the image submission flow.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical -->
+    <div class="section">
+        <div class="section-title">Technical</div>
+        <div class="tech-box">
+            <span>Reload demo:</span> <code>make full-demo</code><br>
+            <span>Start app:</span> <code>make up</code> or <code>docker compose up --build -d</code><br>
+            <span>App URL:</span> <code>http://localhost:8000</code><br>
+            <span>Admin panel:</span> <code>http://localhost:8000/admin/</code> <span>(any user — all are staff)</span><br>
+            <span>This page:</span> <code>/demo/</code> <span>(password: accessovox)</span><br>
+            <span>Cloudflare tunnel:</span> <span>port 8000</span>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -25,6 +25,12 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() in ('1', 'true', 'yes')
 # In Docker, set ALLOWED_HOSTS environment variable (e.g., ALLOWED_HOSTS=* or ALLOWED_HOSTS=localhost,127.0.0.1)
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
+# Trust origins for CSRF (Cloudflare tunnel and localhost)
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    'CSRF_TRUSTED_ORIGINS',
+    'https://voxvox.hablandodeia.com,http://localhost:8000,http://127.0.0.1:8000'
+).split(',')
+
 
 # Application definition
 
