@@ -106,7 +106,7 @@ mkdir -p "$UPDATE_LOG_DIR"
 chown "$DEV_USER:$DEV_USER" "$UPDATE_LOG_DIR"
 
 CRON_UPDATE="0 6 * * * $UPDATE_SCRIPT all >> $UPDATE_LOG_DIR/cron.log 2>&1"
-(su - "$DEV_USER" -c "crontab -l" 2>/dev/null | grep -v 'update-tools.sh' ; echo "$CRON_UPDATE") | su - "$DEV_USER" -c "crontab -"
+( su - "$DEV_USER" -c "crontab -l" 2>/dev/null | grep -v 'update-tools.sh' || true ; echo "$CRON_UPDATE" ) | su - "$DEV_USER" -c "crontab -"
 echo "==> Cron job installed: daily 6:00 AM UTC tool update"
 
 # -- 8. uv (Python package manager) -------------------------------------------
