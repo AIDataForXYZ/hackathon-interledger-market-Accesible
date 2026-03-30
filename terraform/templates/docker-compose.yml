@@ -1,0 +1,23 @@
+services:
+  web:
+    build:
+      context: /home/dev/marketplace/marketplace-py
+      dockerfile: Dockerfile
+    container_name: voxvox-web
+    ports:
+      - "8000:8000"
+    volumes:
+      - /home/dev/marketplace/marketplace-py:/app
+      - /app/.venv
+    environment:
+      - DJANGO_SETTINGS_MODULE=marketplace.settings
+      - PYTHONUNBUFFERED=1
+      - ALLOWED_HOSTS=*
+    command: >
+      sh -c "
+        uv run python manage.py migrate --noinput &&
+        uv run python manage.py collectstatic --noinput &&
+        uv run python manage.py load_default_jobs &&
+        uv run python manage.py runserver 0.0.0.0:8000
+      "
+    restart: unless-stopped

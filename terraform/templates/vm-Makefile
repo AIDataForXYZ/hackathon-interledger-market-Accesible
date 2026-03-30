@@ -1,0 +1,67 @@
+.PHONY: help up down restart logs ps dev-run dev-migrate dev-test dev-shell claude codex
+
+DEPLOY_DIR := $(HOME)/marketplace-deploy
+APP_DIR    := $(HOME)/marketplace
+PY_DIR     := $(APP_DIR)/marketplace-py
+
+help: ## Show this help
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
+
+# --- Docker Compose lifecycle ---
+
+up: ## Start all containers (docker compose)
+	cd $(DEPLOY_DIR) && docker compose up -d
+
+down: ## Stop all containers
+	cd $(DEPLOY_DIR) && docker compose down
+
+restart: ## Restart web container
+	cd $(DEPLOY_DIR) && docker compose restart web
+
+logs: ## Tail web container logs
+	cd $(DEPLOY_DIR) && docker compose logs -f web
+
+logs-all: ## Tail all container logs
+	cd $(DEPLOY_DIR) && docker compose logs -f
+
+ps: ## Show running containers
+	@echo "--- docker containers ---"
+	@docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" 2>/dev/null || echo "  (none)"
+	@echo ""
+	@echo "--- tmux sessions ---"
+	@tmux list-sessions 2>/dev/null || echo "  (none)"
+
+# --- Local development (source, no Docker) ---
+
+dev-run: ## Run Django dev server on :8000
+	cd $(PY_DIR) && uv run python manage.py runserver 0.0.0.0:8000
+
+dev-migrate: ## Run database migrations
+	cd $(PY_DIR) && uv run python manage.py migrate
+
+dev-test: ## Run tests
+	cd $(PY_DIR) && uv run python manage.py test
+
+dev-shell: ## Open Django shell
+	cd $(PY_DIR) && uv run python manage.py shell
+
+dev-static: ## Collect static files
+	cd $(PY_DIR) && uv run python manage.py collectstatic --noinput
+
+demo: ## Load demo data (users + default jobs)
+	cd $(PY_DIR) && uv run python manage.py load_demo_users && uv run python manage.py load_default_jobs
+
+# --- AI coding tools ---
+
+claude: ## Launch Claude Code in marketplace repo (tmux)
+	tmux new-session -As claude -c $(APP_DIR) "claude --dangerously-skip-permissions"
+
+codex: ## Launch Codex CLI in marketplace repo (tmux)
+	tmux new-session -As codex -c $(APP_DIR) "codex --dangerously-bypass-approvals-and-sandbox"
+
+# --- Status ---
+
+status: ## Show startup log
+	sudo tail -20 /var/log/voxvos-startup.log
+
+.DEFAULT_GOAL := help
