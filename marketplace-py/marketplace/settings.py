@@ -134,10 +134,37 @@ LANGUAGES = [
     ('en', 'English'),
     ('es', 'Spanish'),
     ('nah', 'Nahuatl'),
-    ('oto', 'Otomi (?uhu)'),
+    ('oto', 'Otomí (Hñähñu)'),
     ('maz', 'Mazahua'),
     ('que', 'Quechua'),
 ]
+
+# Full map of all language codes used in jobs to display names
+LANGUAGE_DISPLAY_NAMES = {
+    'en': 'English',
+    'es': 'Español',
+    'nah': 'Náhuatl',
+    'oto': 'Otomí (Hñähñu)',
+    'maz': 'Mazahua',
+    'que': 'Quechua',
+    'tzo': 'Tsotsil',
+    'trs': 'Triqui',
+    'zai': 'Zapoteco',
+    'cak': 'Kaqchikel',
+    'aym': 'Aymara',
+    'miq': 'Miskito',
+    'gn': 'Guaraní',
+    'arn': 'Mapudungun',
+    'yua': 'Maya Yucateco',
+    'ppl': 'Nawat',
+    'pua': 'Purépecha',
+    'shp': 'Shipibo-Konibo',
+    'cni': 'Asháninka',
+    'quc': "K'iche'",
+    'chj': 'Chinanteco',
+    'cuk': 'Guna',
+    'mxt': 'Mixteco',
+}
 
 # UI language rules
 SUPPORTED_UI_LANGUAGES = ('en', 'es')

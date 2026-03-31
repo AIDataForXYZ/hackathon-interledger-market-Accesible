@@ -4,6 +4,7 @@ services:
       context: marketplace-py
       dockerfile: Dockerfile
     container_name: hackathon-interledger-market
+    restart: always
     ports:
       - "8000:8000"
     volumes:

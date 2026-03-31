@@ -584,6 +584,7 @@ class Command(BaseCommand):
             "Contraseña.mp3": ("form_password", "Contraseña", "form"),
             "Confirma-tu-Contraseña.mp3": ("form_confirm_password", "Confirma tu Contraseña", "form"),
             "Ingresar---Iniciar-Sesión.mp3": ("action_login", "Ingresar / Iniciar Sesión", "button"),
+            "Ingresar-Iniciar-Sesión.mp3": ("action_login_alt", "Ingresar / Iniciar Sesión", "button"),
             "Escoge-tu-idioma--Qué-idiomas-hablas.mp3": (
                 "form_choose_language", "Escoge tu idioma / Qué idiomas hablas", "form"),
             "Número-de-teléfono.mp3": ("form_phone", "Número de teléfono", "form"),
@@ -591,6 +592,10 @@ class Command(BaseCommand):
                 "msg_terms", "Al registrarte, aceptas nuestros Términos y Condiciones", "message"),
             "Perdón-esto-aún-no-se-ha-traducido.mp3": (
                 "msg_not_yet_translated", "Perdón, esto aún no se ha traducido", "message"),
+            "Bienvenidos-a-nuestra-casa,-la-casa-del-bosque.-Cuiden-de-nuestra-tierra-como-nosotros-lo-hacemos..mp3": (
+                "content_ecoturismo_welcome", "Bienvenidos a nuestra casa", "message"),
+            "Este-domingo-son-las-elecciones.-Tu-voto-es-libre-y-secreto.-Participa-para-decidir-el-futuro-de-tu-comunidad.-Acude-a-tu-casilla-con-tu-credencial.-Tu-voz-cuenta.mp3": (
+                "content_election_spot", "Spot electoral", "message"),
         }
 
         # Source directories for audio files
