@@ -10,10 +10,10 @@ from users.models import User
 
 
 class HomeViewTest(TestCase):
-    def test_anonymous_redirects_to_job_list(self):
+    def test_anonymous_sees_landing_page(self):
         response = self.client.get("/")
-        self.assertEqual(response.status_code, 302)
-        self.assertIn("browse", response.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Native Language")
 
     def test_logged_in_redirects_to_dashboard(self):
         user = User.objects.create_user(username="u", password="pass")
