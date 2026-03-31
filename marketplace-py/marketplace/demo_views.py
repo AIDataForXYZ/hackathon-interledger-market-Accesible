@@ -57,6 +57,16 @@ def _get_stats():
     }
 
 
+def demo_directory(request):
+    """Master directory page — links to all demo sections."""
+    auth_response = _check_auth(request)
+    if auth_response:
+        return auth_response
+    context = _get_stats()
+    context["page"] = "directory"
+    return render(request, "demo/directory.html", context)
+
+
 def demo_story(request):
     """Page 1: The problem, the solution, the impact."""
     auth_response = _check_auth(request)
