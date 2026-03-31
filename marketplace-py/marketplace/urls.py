@@ -7,10 +7,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from . import views
-from .demo_views import demo_guide
+from .demo_views import demo_story, demo_walkthrough, demo_logins
 
 urlpatterns = [
-    path('demo/', demo_guide, name='demo_guide'),
+    path('demo/', demo_story, name='demo_guide'),
+    path('demo/walkthrough/', demo_walkthrough, name='demo_walkthrough'),
+    path('demo/logins/', demo_logins, name='demo_logins'),
     path('admin/', admin.site.urls),
     # Ensure our custom language switcher overrides Django's default set_language view
     path('i18n/setlang/', views.set_language_custom, name='set_language_custom'),
